@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monument Recovery - SEO & AI Search Audit Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: letter;
+    margin: 0.9in 1.1in;
+  }
+
+  :root {
+    --ink: #1a1a1a;
+    --ink-light: #4a4a4a;
+    --ink-muted: #7a7a7a;
+    --surface: #ffffff;
+    --surface-warm: #faf8f5;
+    --accent: #2d5a3d;
+    --accent-light: #e8f0eb;
+    --accent-mid: #3d7a54;
+    --border: #e2ddd6;
+    --red: #9b3232;
+    --red-bg: #fdf2f2;
+    --red-mid: #c44848;
+    --amber: #8a6914;
+    --amber-bg: #fef9ec;
+    --green: #2d5a3d;
+    --green-bg: #e8f0eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--surface);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* --- COVER PAGE --- */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 0;
+    page-break-after: always;
+  }
+
+  .cover-rule {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 2rem;
+    border: none;
+  }
+
+  .cover-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+  }
+
+  .cover h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 40pt;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .cover h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .cover-subtitle {
+    font-size: 13pt;
+    color: var(--ink-muted);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    max-width: 480px;
+  }
+
+  .cover-meta dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 2px;
+  }
+
+  .cover-meta dd {
+    font-size: 10.5pt;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .cover-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    max-width: 480px;
+  }
+
+  .cover-stat-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28pt;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .cover-stat-label {
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+
+  /* --- SECTIONS --- */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22pt;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12pt;
+    font-weight: 600;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5pt;
+    font-weight: 600;
+    margin-top: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  p {
+    margin-bottom: 0.7rem;
+    color: var(--ink-light);
+  }
+
+  .lead {
+    font-size: 11.5pt;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    max-width: 580px;
+  }
+
+  /* --- OVERALL HEALTH GAUGE --- */
+  .health-gauge {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+
+  .gauge-ring {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .gauge-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .gauge-ring .bg {
+    fill: none;
+    stroke: #e8e4de;
+    stroke-width: 8;
+  }
+
+  .gauge-ring .fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 251;
+  }
+
+  .gauge-ring .score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Instrument Serif', serif;
+    font-size: 24pt;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .gauge-ring .score-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 18px));
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .gauge-details { flex: 1; }
+
+  .gauge-details h3 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+    font-size: 11pt;
+  }
+
+  .gauge-details p {
+    font-size: 9.5pt;
+    margin-bottom: 0;
+  }
+
+  .gauge-breakdown {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .gauge-breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+  }
+
+  .gauge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .gauge-dot.red { background: var(--red); }
+  .gauge-dot.amber { background: var(--amber); }
+  .gauge-dot.green { background: var(--green); }
+
+  /* --- SUMMARY CARDS --- */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 1.5rem 0;
+  }
+
+  .summary-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--surface-warm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .summary-card.critical { border-color: #d4a0a0; background: var(--red-bg); }
+  .summary-card.critical::before { background: var(--red); }
+  .summary-card.warning { border-color: #d4c49a; background: var(--amber-bg); }
+  .summary-card.warning::before { background: var(--amber); }
+  .summary-card.good { border-color: #a0c4ac; background: var(--green-bg); }
+  .summary-card.good::before { background: var(--green); }
+
+  .summary-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+
+  .summary-card .value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22pt;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .summary-card.critical .value { color: var(--red); }
+  .summary-card.warning .value { color: var(--amber); }
+  .summary-card.good .value { color: var(--green); }
+
+  .summary-card .detail {
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* --- ICON STAT CARDS --- */
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 1.5rem 0;
+  }
+
+  .stat-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--surface-warm);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .stat-icon.red { background: var(--red-bg); color: var(--red); }
+  .stat-icon.amber { background: var(--amber-bg); color: var(--amber); }
+  .stat-icon.green { background: var(--green-bg); color: var(--green); }
+
+  .stat-content { flex: 1; }
+
+  .stat-content .stat-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18pt;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .stat-content .stat-label {
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  /* --- TABLES --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 9.5pt;
+  }
+
+  thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--ink);
+    font-weight: 500;
+  }
+
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* Alternating row bg */
+  tbody tr:nth-child(even) td { background: var(--surface-warm); }
+
+  /* Status dots in tables */
+  .status-pass, .status-fail, .status-warn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+
+  .status-pass::before, .status-fail::before, .status-warn::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-pass { color: var(--green); }
+  .status-pass::before { background: var(--green); }
+  .status-fail { color: var(--red); }
+  .status-fail::before { background: var(--red); }
+  .status-warn { color: var(--amber); }
+  .status-warn::before { background: var(--amber); }
+
+  /* --- ISSUE CARDS --- */
+  .issue {
+    border-left: 3px solid var(--border);
+    padding: 16px 20px;
+    margin: 1.2rem 0;
+    background: var(--surface-warm);
+    border-radius: 0 8px 8px 0;
+    page-break-inside: avoid;
+  }
+
+  .issue.high { border-left-color: var(--red); }
+  .issue.medium { border-left-color: var(--amber); }
+  .issue.low { border-left-color: var(--green); }
+
+  .issue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .issue-title {
+    font-weight: 600;
+    font-size: 11pt;
+    color: var(--ink);
+  }
+
+  .impact-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  .impact-badge.high { color: var(--red); background: var(--red-bg); border: 1px solid #d4a0a0; }
+  .impact-badge.medium { color: var(--amber); background: var(--amber-bg); border: 1px solid #d4c49a; }
+
+  .issue-body { color: var(--ink-light); font-size: 9.5pt; }
+  .issue-body p { margin-bottom: 0.5rem; }
+
+  .fix-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+
+  /* --- CALLOUTS --- */
+  .callout {
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 1.5rem 0;
+    page-break-inside: avoid;
+  }
+
+  .callout.important {
+    background: var(--red-bg);
+    border-color: #d4a0a0;
+  }
+
+  .callout.info {
+    background: var(--accent-light);
+    border-color: #a0c4ac;
+  }
+
+  .callout-title {
+    font-weight: 600;
+    font-size: 10.5pt;
+    margin-bottom: 6px;
+  }
+
+  .callout p {
+    font-size: 9.5pt;
+    margin-bottom: 0.3rem;
+  }
+
+  /* --- LISTS --- */
+  ul, ol {
+    padding-left: 1.4rem;
+    margin-bottom: 0.7rem;
+    color: var(--ink-light);
+  }
+
+  li { margin-bottom: 0.35rem; font-size: 9.5pt; line-height: 1.5; }
+
+  /* --- CODE --- */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  pre {
+    background: #2c2c2c;
+    color: #e8e4de;
+    border-radius: 8px;
+    padding: 18px 22px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    line-height: 1.65;
+  }
+
+  pre .key { color: #7ec8a0; }
+  pre .str { color: #ce9178; }
+  pre .bracket { color: #b0b0b0; }
+
+  /* --- SCORE BARS --- */
+  .score-section {
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 1.5rem 0;
+  }
+
+  .score-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .score-label {
+    font-size: 9pt;
+    color: var(--ink-light);
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .score-bar-bg {
+    flex: 1;
+    height: 10px;
+    background: #e8e4de;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+  }
+
+  .score-bar-fill.red { background: linear-gradient(90deg, var(--red), var(--red-mid)); }
+  .score-bar-fill.amber { background: linear-gradient(90deg, #c49a2a, var(--amber)); }
+  .score-bar-fill.green { background: linear-gradient(90deg, var(--green), var(--accent-mid)); }
+
+  .score-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    font-weight: 500;
+    width: 32px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .score-value.red { color: var(--red); }
+  .score-value.amber { color: var(--amber); }
+  .score-value.green { color: var(--green); }
+
+  /* --- DONUT / PIE CHARTS (CSS) --- */
+  .donut-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 1.5rem 0;
+  }
+
+  .donut-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    background: var(--surface-warm);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .donut {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .donut-inner {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--surface-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11pt;
+    font-weight: 500;
+    z-index: 1;
+  }
+
+  .donut-info h4 {
+    margin: 0 0 3px;
+    font-size: 10pt;
+  }
+
+  .donut-info p {
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+
+  /* --- IMPACT VISUAL --- */
+  .impact-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 1.5rem 0;
+  }
+
+  .impact-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--surface-warm);
+    text-align: center;
+  }
+
+  .impact-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32pt;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .impact-number.red { color: var(--red); }
+  .impact-number.amber { color: var(--amber); }
+  .impact-number.green { color: var(--green); }
+
+  .impact-desc {
+    font-size: 9pt;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  .impact-source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    color: var(--ink-muted);
+    margin-top: 6px;
+    opacity: 0.7;
+  }
+
+  /* --- FLOW / FUNNEL --- */
+  .flow-steps {
+    display: flex;
+    gap: 0;
+    margin: 1.5rem 0;
+    align-items: stretch;
+  }
+
+  .flow-step {
+    flex: 1;
+    padding: 14px 16px;
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    position: relative;
+    text-align: center;
+  }
+
+  .flow-step:first-child { border-radius: 8px 0 0 8px; }
+  .flow-step:last-child { border-radius: 0 8px 8px 0; }
+  .flow-step + .flow-step { border-left: none; }
+
+  .flow-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .flow-step-title {
+    font-weight: 600;
+    font-size: 9pt;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .flow-step-detail {
+    font-size: 8pt;
+    color: var(--ink-muted);
+    line-height: 1.3;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--accent);
+    font-size: 16pt;
+    padding: 0 2px;
+    flex-shrink: 0;
+  }
+
+  /* --- DIVIDERS --- */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .page-break { page-break-before: always; }
+
+  /* --- CHECKLIST --- */
+  .checklist { list-style: none; padding-left: 0; }
+
+  .checklist li {
+    padding: 8px 0 8px 2rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    background: var(--surface);
+  }
+
+  /* --- TIMELINE --- */
+  .timeline {
+    position: relative;
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+    page-break-inside: avoid;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--surface);
+    z-index: 1;
+    margin-left: 0px;
+  }
+
+  .timeline-item.urgent::before { border-color: var(--red); background: var(--red-bg); }
+  .timeline-item.medium::before { border-color: var(--amber); background: var(--amber-bg); }
+
+  .timeline-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .timeline-label.urgent { color: var(--red); }
+  .timeline-label.medium { color: var(--amber); }
+  .timeline-label.standard { color: var(--accent); }
+
+  .timeline-title {
+    font-weight: 600;
+    font-size: 10.5pt;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc {
+    font-size: 9pt;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* --- FOOTER --- */
+  .report-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  @media print {
+    body { font-size: 10pt; padding: 0; max-width: none; }
+    .cover { min-height: auto; padding: 4rem 0; }
+    pre { background: #2c2c2c !important; color: #e8e4de !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER PAGE ============ -->
+<div class="cover">
+  <hr class="cover-rule">
+  <div class="cover-badge">Website Audit Report</div>
+  <h1>SEO & <em>AI Search</em><br>Visibility Audit</h1>
+  <p class="cover-subtitle">An assessment of monumentrecovery.com with prioritized recommendations for improving organic search performance and AI search citability.</p>
+  <dl class="cover-meta">
+    <div>
+      <dt>Prepared For</dt>
+      <dd>Monument Recovery</dd>
+    </div>
+    <div>
+      <dt>Site</dt>
+      <dd>monumentrecovery.com</dd>
+    </div>
+    <div>
+      <dt>Date</dt>
+      <dd>March 24, 2026</dd>
+    </div>
+  </dl>
+  <div class="cover-stats">
+    <div>
+      <div class="cover-stat-value">47</div>
+      <div class="cover-stat-label">Pages Indexed</div>
+    </div>
+    <div>
+      <div class="cover-stat-value">40+</div>
+      <div class="cover-stat-label">Blog Posts</div>
+    </div>
+    <div>
+      <div class="cover-stat-value">9</div>
+      <div class="cover-stat-label">Issues Found</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EXECUTIVE SUMMARY ============ -->
+<div class="section">
+  <div class="section-number">Section 01</div>
+  <h2>Executive Summary</h2>
+  <p class="lead">Monument Recovery's website has a solid content foundation with 47 indexed pages, an active blog, and clean URL structure. However, several high-impact gaps are limiting organic search performance and making the site nearly invisible to AI search platforms.</p>
+
+  <!-- Overall Health Gauge -->
+  <div class="health-gauge">
+    <div class="gauge-ring">
+      <svg viewBox="0 0 100 100">
+        <circle class="bg" cx="50" cy="50" r="40"/>
+        <circle class="fill" cx="50" cy="50" r="40" stroke="#c49a2a" style="stroke-dashoffset: 151;"/>
+      </svg>
+      <span class="score-text">40</span>
+      <span class="score-label">/ 100</span>
+    </div>
+    <div class="gauge-details">
+      <h3>Overall SEO Health</h3>
+      <p>Good technical foundation, but critical gaps in structured data, content authority signals, and AI search optimization are holding the site back from its ranking potential.</p>
+      <div class="gauge-breakdown">
+        <div class="gauge-breakdown-item"><span class="gauge-dot red"></span> 3 Critical</div>
+        <div class="gauge-breakdown-item"><span class="gauge-dot amber"></span> 6 Moderate</div>
+        <div class="gauge-breakdown-item"><span class="gauge-dot green"></span> 9 Passing</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card critical">
+      <div class="label">Schema Markup</div>
+      <div class="value">Missing</div>
+      <div class="detail">No structured data on any page. Search engines can't identify this as a medical facility.</div>
+    </div>
+    <div class="summary-card critical">
+      <div class="label">Author Attribution</div>
+      <div class="value">None</div>
+      <div class="detail">All 40+ blog posts credited to org name. No clinician credentials visible.</div>
+    </div>
+    <div class="summary-card warning">
+      <div class="label">Meta Descriptions</div>
+      <div class="value">Partial</div>
+      <div class="detail">Homepage has one, but key inner pages are missing them entirely.</div>
+    </div>
+  </div>
+
+  <div class="callout important">
+    <div class="callout-title">Why this matters for addiction treatment</div>
+    <p>Google classifies healthcare and addiction treatment as <strong>YMYL (Your Money, Your Life)</strong> content, meaning it holds these pages to the highest quality standards. Sites without strong E-E-A-T signals (Experience, Expertise, Authoritativeness, Trustworthiness) are actively suppressed in search rankings. The missing elements identified in this audit are not nice-to-haves -- they directly impact whether Google trusts the site enough to rank it for competitive treatment queries.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ WHAT'S WORKING ============ -->
+<div class="section">
+  <div class="section-number">Section 02</div>
+  <h2>What's Working Well</h2>
+  <p class="lead">Before diving into issues, here's what the site already does right.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:30%">Area</th><th style="width:15%">Status</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>URL Structure</strong></td><td><span class="status-pass">Pass</span></td><td>Clean, descriptive, keyword-rich URLs (e.g., <code>/residential-addiction-treatment</code>)</td></tr>
+      <tr><td><strong>XML Sitemap</strong></td><td><span class="status-pass">Pass</span></td><td>Present with 47 URLs, accessible at <code>/sitemap.xml</code></td></tr>
+      <tr><td><strong>Robots.txt</strong></td><td><span class="status-pass">Pass</span></td><td>Clean config. No AI bots blocked (GPTBot, ClaudeBot, PerplexityBot all allowed)</td></tr>
+      <tr><td><strong>HTTPS</strong></td><td><span class="status-pass">Pass</span></td><td>Full HTTPS with proper redirect from HTTP</td></tr>
+      <tr><td><strong>Canonical Tags</strong></td><td><span class="status-pass">Pass</span></td><td>Present on pages (HubSpot handles this automatically)</td></tr>
+      <tr><td><strong>Blog Activity</strong></td><td><span class="status-pass">Pass</span></td><td>40+ posts, most recent Jan 2026. Active publishing signals freshness</td></tr>
+      <tr><td><strong>Substance Pages</strong></td><td><span class="status-pass">Pass</span></td><td>Dedicated pages for fentanyl, alcohol, meth, cocaine, kratom, benzodiazepine</td></tr>
+      <tr><td><strong>Open Graph Tags</strong></td><td><span class="status-pass">Pass</span></td><td>Present on homepage for social sharing previews</td></tr>
+      <tr><td><strong>Service Hierarchy</strong></td><td><span class="status-pass">Pass</span></td><td>Clear continuum: Residential, PHP, IOP, Virtual IOP, Aftercare</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============ CRITICAL ISSUES ============ -->
+<div class="section">
+  <div class="section-number">Section 03</div>
+  <h2>Critical Issues</h2>
+  <p class="lead">These issues are actively limiting search visibility and should be addressed first.</p>
+
+  <!-- Issue 1 -->
+  <div class="issue high">
+    <div class="issue-header">
+      <span class="issue-title">1. No Schema Markup (Structured Data)</span>
+      <span class="impact-badge high">High Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>What we found:</strong> The site has an empty <code>&lt;script type="application/ld+json"&gt;</code> tag from the GatherUp review widget, but no actual structured data is being output. There is no <code>MedicalOrganization</code>, <code>LocalBusiness</code>, <code>FAQPage</code>, or <code>Article</code> schema on any page.</p>
+      <p><strong>Why it matters:</strong> Schema markup is how you explicitly tell Google and AI systems "we are a licensed medical facility at this address with these services." Without it, search engines have to guess. For healthcare sites, this directly impacts:</p>
+      <ul>
+        <li>Eligibility for rich results (enhanced search listings with ratings, address, phone)</li>
+        <li>Google Business Profile integration with the website</li>
+        <li>AI systems' ability to extract and cite facility details accurately</li>
+        <li>Knowledge Panel population and accuracy</li>
+      </ul>
+      <p>Content with proper schema shows <strong>30-40% higher AI visibility</strong> according to current research.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p>Add the following schema types across the site:</p>
+      <ul>
+        <li><code>MedicalOrganization</code> + <code>LocalBusiness</code> -- sitewide in the global header</li>
+        <li><code>FAQPage</code> -- on treatment pages and blog posts that contain Q&A content</li>
+        <li><code>Article</code> / <code>BlogPosting</code> -- on all blog posts (with author, date, publisher)</li>
+        <li><code>MedicalWebPage</code> -- on treatment service pages</li>
+      </ul>
+      <p>In HubSpot, this can be added via the theme's global header or through a custom coded module. A copy-paste-ready JSON-LD block is included in the Appendix.</p>
+    </div>
+  </div>
+
+  <!-- Issue 2 -->
+  <div class="issue high">
+    <div class="issue-header">
+      <span class="issue-title">2. No Author Attribution on Blog Content</span>
+      <span class="impact-badge high">High Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>What we found:</strong> All 40+ blog posts are attributed to "Monument Recovery" as an organization. No individual author names, credentials, or bios appear on any post.</p>
+      <p><strong>Why it matters:</strong> For YMYL (healthcare) content, Google's Search Quality Evaluator Guidelines explicitly look for content "created by individuals with appropriate expertise or qualifications." Addiction treatment is one of the most scrutinized categories. Google wants to see:</p>
+      <ul>
+        <li>Who wrote this content? (Named author with visible credentials)</li>
+        <li>Are they qualified? (Licensed therapist, LCSW, MD, etc.)</li>
+        <li>Was clinical content medically reviewed? (A "Reviewed by" badge)</li>
+      </ul>
+      <p>Without this, Google treats blog content as lower-authority, and AI systems are less likely to cite it as a source because they can't verify expertise.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <ul>
+        <li>Assign named authors from the clinical team (staff listed on <code>/addiction-recovery-team</code>)</li>
+        <li>Add author bio boxes to blog posts with name, title, credentials, and photo</li>
+        <li>Add "Medically Reviewed by [Name], [Credential]" badges to clinical content</li>
+        <li>Create individual author archive pages so Google can connect expertise to content</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Issue 3 -->
+  <div class="issue high">
+    <div class="issue-header">
+      <span class="issue-title">3. Missing Meta Descriptions on Inner Pages</span>
+      <span class="impact-badge high">High Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>What we found:</strong> The homepage has a meta description, but key inner pages are missing them, including Treatment Services, About, and the Blog listing page.</p>
+      <p><strong>Why it matters:</strong> The meta description is what appears as the snippet text beneath your page title in Google search results. When it's missing, Google auto-generates one by pulling random text from the page -- often resulting in an awkward, incomplete snippet that doesn't compel clicks. Low click-through rates signal to Google that the result isn't relevant, which can gradually lower rankings.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p>Write unique meta descriptions (150-160 characters) for every page. Each should include the primary keyword, a clear value statement, and a reason to click. Examples:</p>
+      <ul>
+        <li><strong>Treatment Services:</strong> "Monument Recovery offers residential, PHP, IOP, and virtual outpatient addiction treatment in Mesa, AZ. Individualized plans for substance use and mental health."</li>
+        <li><strong>About:</strong> "Learn about Monument Recovery's evidence-based approach to addiction treatment in Mesa, Arizona. Accredited facility with licensed therapists and holistic care."</li>
+        <li><strong>Blog:</strong> "Recovery resources, treatment guides, and expert insights from Monument Recovery's clinical team in Mesa, AZ."</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============ MODERATE ISSUES ============ -->
+<div class="section">
+  <div class="section-number">Section 04</div>
+  <h2>Moderate Issues</h2>
+  <p class="lead">These issues reduce performance but aren't as urgent as the critical items above.</p>
+
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">4. Multiple H1 Tags on Homepage</span>
+      <span class="impact-badge medium">Medium Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>What we found:</strong> The homepage has two H1 tags: "Addiction Treatment & Rehab in Arizona" and "Build Your Best Life." Each page should have exactly one H1 that clearly signals the page's primary topic to search engines.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p>Keep "Addiction Treatment & Rehab in Arizona" as the H1. Change "Build Your Best Life" to an H2.</p>
+    </div>
+  </div>
+
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">5. Image Alt Text Missing or Generic</span>
+      <span class="impact-badge medium">Medium Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>What we found:</strong> Many images use generic filenames as alt text (e.g., "DSC02519-1.jpg", "24-MMT-0535-Website2-1.png") or appear to have no alt text at all.</p>
+      <p><strong>Why it matters:</strong> Alt text helps Google understand image content for image search rankings and accessibility compliance. Descriptive alt text like "Monument Recovery residential treatment common area in Mesa Arizona" reinforces location relevance and helps rank in image search.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p>Audit all images sitewide. Replace generic filenames with descriptive alt text that includes relevant keywords naturally. Focus on facility photos, team photos, and treatment program images first.</p>
+    </div>
+  </div>
+
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">6. Homepage Title Could Be Stronger</span>
+      <span class="impact-badge medium">Medium Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>Current:</strong> "Monument Recovery | Rehab in Arizona"</p>
+      <p><strong>Issue:</strong> "Arizona" is broad. Most people searching for treatment search by city. The title misses the "Mesa" keyword entirely.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p><strong>Suggested:</strong> "Addiction Treatment & Rehab in Mesa, AZ | Monument Recovery" -- puts the primary keyword first, includes the city name, keeps the brand at the end.</p>
+    </div>
+  </div>
+
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">7. Treatment Service Pages Are Thin</span>
+      <span class="impact-badge medium">Medium Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>What we found:</strong> The Treatment Services page has approximately 800-900 words. Individual treatment pages appear similarly thin. Competitive rehab pages in the Mesa/Phoenix market typically run 1,500-2,500+ words.</p>
+      <p><strong>Why it matters:</strong> Google evaluates whether content provides sufficient depth to answer the searcher's question. For queries like "PHP addiction treatment Arizona," ranking pages comprehensively cover what PHP involves, who it's for, daily schedule, duration, insurance, and outcomes.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p>Expand each treatment page to 1,500+ words covering: program structure, daily schedule, therapeutic modalities, duration, who it's best for, insurance/cost info, and frequently asked questions.</p>
+    </div>
+  </div>
+
+  <!-- Content depth visual -->
+  <div class="donut-row">
+    <div class="donut-card">
+      <div class="donut" style="background: conic-gradient(var(--amber) 0deg 120deg, #e8e4de 120deg 360deg);">
+        <div class="donut-inner" style="color: var(--amber);">~900</div>
+      </div>
+      <div class="donut-info">
+        <h4>Monument Recovery</h4>
+        <p>Average words on treatment service pages. Falls short of the depth needed for competitive queries.</p>
+      </div>
+    </div>
+    <div class="donut-card">
+      <div class="donut" style="background: conic-gradient(var(--green) 0deg 300deg, #e8e4de 300deg 360deg);">
+        <div class="donut-inner" style="color: var(--green);">2,000+</div>
+      </div>
+      <div class="donut-info">
+        <h4>Competitor Average</h4>
+        <p>Typical word count on top-ranking treatment service pages in the Mesa/Phoenix market.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">8. Blog Page Title is Generic</span>
+      <span class="impact-badge medium">Medium Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>Current:</strong> The blog listing page title is just "Monument Recovery" -- no descriptive text.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p>Change to: "Recovery Blog | Addiction Treatment Resources | Monument Recovery"</p>
+    </div>
+  </div>
+
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">9. No "Last Updated" Dates on Service Pages</span>
+      <span class="impact-badge medium">Medium Impact</span>
+    </div>
+    <div class="issue-body">
+      <p><strong>What we found:</strong> Blog posts show publication dates, but treatment service pages have no visible date indicators.</p>
+      <p><strong>Why it matters:</strong> Both Google and AI systems weight content freshness heavily for healthcare. A treatment page showing "Last updated: March 2026" signals current information, while undated pages could be years old.</p>
+      <div class="fix-label">Recommended Fix</div>
+      <p>Add "Last reviewed: [date]" or "Updated: [date]" to all treatment service pages. Keep current with quarterly reviews.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============ AI SEARCH VISIBILITY ============ -->
+<div class="section">
+  <div class="section-number">Section 05</div>
+  <h2>AI Search Visibility</h2>
+  <p class="lead">AI-powered search (Google AI Overviews, ChatGPT, Perplexity) now represents a growing share of how people find treatment providers. This section covers what's needed to appear in AI-generated answers.</p>
+
+  <!-- Impact stats -->
+  <div class="impact-visual">
+    <div class="impact-card">
+      <div class="impact-number red">45%</div>
+      <div class="impact-desc">of Google searches now show<br>an AI Overview summary</div>
+      <div class="impact-source">Google, 2025</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-number red">-58%</div>
+      <div class="impact-desc">reduction in website clicks when<br>AI Overviews appear</div>
+      <div class="impact-source">Advanced Web Ranking</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-number green">+40%</div>
+      <div class="impact-desc">AI citation boost from including<br>statistics with sources</div>
+      <div class="impact-source">Princeton GEO Study, KDD 2024</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-number green">+30%</div>
+      <div class="impact-desc">AI visibility increase from<br>proper schema markup</div>
+      <div class="impact-source">Industry research</div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">What this means for Monument Recovery</div>
+    <p>When someone searches "best rehab in Mesa AZ" or "what is PHP addiction treatment," Google increasingly shows an AI-generated summary at the top. If Monument Recovery isn't structured to be cited in that summary, the facility becomes invisible -- even if it ranks on page 1. ChatGPT and Perplexity are also increasingly used by families researching treatment options. These systems cite sources, but only sources structured in a way they can extract and verify.</p>
+  </div>
+
+  <h3>Current AI Citability Scorecard</h3>
+
+  <div class="score-section">
+    <div class="score-section-title">How ready is your content for AI extraction?</div>
+    <div class="score-row">
+      <span class="score-label">AI bot access (robots.txt)</span>
+      <div class="score-bar-bg"><div class="score-bar-fill green" style="width: 100%"></div></div>
+      <span class="score-value green">5/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Heading structure</span>
+      <div class="score-bar-bg"><div class="score-bar-fill amber" style="width: 60%"></div></div>
+      <span class="score-value amber">3/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Content freshness signals</span>
+      <div class="score-bar-bg"><div class="score-bar-fill amber" style="width: 40%"></div></div>
+      <span class="score-value amber">2/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Extractable answer blocks</span>
+      <div class="score-bar-bg"><div class="score-bar-fill amber" style="width: 40%"></div></div>
+      <span class="score-value amber">2/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Structured answer blocks</span>
+      <div class="score-bar-bg"><div class="score-bar-fill red" style="width: 20%"></div></div>
+      <span class="score-value red">1/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Statistics with sources</span>
+      <div class="score-bar-bg"><div class="score-bar-fill red" style="width: 2%"></div></div>
+      <span class="score-value red">0/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Expert quotes / attribution</span>
+      <div class="score-bar-bg"><div class="score-bar-fill red" style="width: 2%"></div></div>
+      <span class="score-value red">0/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">FAQ sections</span>
+      <div class="score-bar-bg"><div class="score-bar-fill red" style="width: 2%"></div></div>
+      <span class="score-value red">0/5</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Schema markup</span>
+      <div class="score-bar-bg"><div class="score-bar-fill red" style="width: 2%"></div></div>
+      <span class="score-value red">0/5</span>
+    </div>
+  </div>
+
+  <h3>What AI Systems Look For</h3>
+  <p>When someone asks an AI "What is the best rehab near Mesa AZ?" or "What's the difference between PHP and IOP?", the AI selects sources based on these factors:</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:22%">Factor</th><th style="width:38%">What It Means</th><th>Monument Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Direct definitions</strong></td>
+        <td>First paragraph answers the query in 40-60 words</td>
+        <td><span class="status-warn">Buried under marketing copy</span></td>
+      </tr>
+      <tr>
+        <td><strong>Statistics w/ sources</strong></td>
+        <td>Specific numbers from SAMHSA, NIDA, or internal data</td>
+        <td><span class="status-fail">None found</span></td>
+      </tr>
+      <tr>
+        <td><strong>Named experts</strong></td>
+        <td>Quotes attributed to credentialed clinicians</td>
+        <td><span class="status-fail">None found</span></td>
+      </tr>
+      <tr>
+        <td><strong>Comparison tables</strong></td>
+        <td>Side-by-side format for "[X] vs [Y]" queries</td>
+        <td><span class="status-fail">None found</span></td>
+      </tr>
+      <tr>
+        <td><strong>FAQ blocks</strong></td>
+        <td>Natural-language Q&A sections AI can extract</td>
+        <td><span class="status-fail">None found</span></td>
+      </tr>
+      <tr>
+        <td><strong>Structured data</strong></td>
+        <td>Schema confirming entity type, location, services</td>
+        <td><span class="status-fail">None found</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>How AI Search Citations Work</h3>
+  <p>Understanding the flow helps explain why structure matters:</p>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-step-num">Step 1</div>
+      <div class="flow-step-title">User Query</div>
+      <div class="flow-step-detail">"What is PHP addiction treatment in Mesa?"</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Step 2</div>
+      <div class="flow-step-title">AI Scans Sources</div>
+      <div class="flow-step-detail">Looks for pages with direct answers, data, and credentials</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Step 3</div>
+      <div class="flow-step-title">Extracts Passages</div>
+      <div class="flow-step-detail">Pulls 40-60 word blocks that directly answer the question</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Step 4</div>
+      <div class="flow-step-title">Cites Source</div>
+      <div class="flow-step-detail">Links back to the page -- driving qualified traffic</div>
+    </div>
+  </div>
+
+  <h3>Key AI-SEO Recommendations</h3>
+
+  <h4>A. Add FAQ Sections to Treatment Pages</h4>
+  <p>Each treatment page should have a 5-8 question FAQ section at the bottom, answering the exact questions families ask. Mark these up with <code>FAQPage</code> schema. Example questions for the PHP page:</p>
+  <ul>
+    <li>"How many hours per day is PHP treatment?"</li>
+    <li>"What's the difference between PHP and IOP?"</li>
+    <li>"Does insurance cover PHP at Monument Recovery?"</li>
+    <li>"How long does a PHP program typically last?"</li>
+    <li>"Can I live at home during PHP?"</li>
+  </ul>
+
+  <h4>B. Add Definition Blocks to Service Page Openings</h4>
+  <p>The first paragraph of every treatment page should be a clear, self-contained definition (40-60 words) that directly answers "What is [this treatment]?" This is the passage AI systems extract and cite. Currently, service pages lead with marketing language rather than direct answers.</p>
+
+  <h4>C. Incorporate Statistics with Cited Sources</h4>
+  <p>Add data points from authoritative sources (SAMHSA, NIDA, peer-reviewed studies) throughout treatment pages. Research shows including cited statistics increases AI citation rates by approximately 37-40%.</p>
+
+  <h4>D. Build a Comparison Table: Levels of Care</h4>
+  <p>A clear side-by-side table (Residential vs PHP vs IOP vs Virtual IOP) covering hours/week, typical duration, structure level, who it's best for, and cost range. This single table could capture "[X] vs [Y]" treatment queries.</p>
+
+  <h4>E. Verify Third-Party Directory Presence</h4>
+  <p>AI systems frequently cite third-party sources rather than the facility's own website. Ensure Monument Recovery is listed and current on:</p>
+  <ul>
+    <li>SAMHSA Treatment Locator (findtreatment.gov)</li>
+    <li>Google Business Profile (optimized with photos, Q&A, regular posts)</li>
+    <li>Psychology Today directory</li>
+    <li>Rehabs.com and similar treatment directories</li>
+  </ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============ PRIORITIZED ACTION PLAN ============ -->
+<div class="section">
+  <div class="section-number">Section 06</div>
+  <h2>Prioritized Action Plan</h2>
+  <p class="lead">Recommendations organized as a phased timeline by priority and effort level.</p>
+
+  <div class="timeline">
+    <div class="timeline-item urgent">
+      <div class="timeline-label urgent">Phase 1 -- Weeks 1-2 (Critical)</div>
+      <div class="timeline-title">Foundation Fixes</div>
+      <div class="timeline-desc">These directly impact indexation, rankings, and trust signals.</div>
+    </div>
+  </div>
+
+  <ul class="checklist">
+    <li>Fix homepage to single H1 (demote "Build Your Best Life" to H2)</li>
+    <li>Write unique meta descriptions for all pages, starting with treatment services and about</li>
+    <li>Add <code>MedicalOrganization</code> + <code>LocalBusiness</code> schema markup to the site header</li>
+    <li>Add named author attribution and credentials to all blog posts</li>
+    <li>Update homepage title to include "Mesa, AZ"</li>
+    <li>Fix blog listing page title</li>
+  </ul>
+
+  <div class="timeline" style="margin-top: 1.5rem;">
+    <div class="timeline-item medium">
+      <div class="timeline-label medium">Phase 2 -- Weeks 3-4 (High Impact)</div>
+      <div class="timeline-title">Content Quality & AI Citability</div>
+      <div class="timeline-desc">These improve content authority and make pages extractable by AI systems.</div>
+    </div>
+  </div>
+
+  <ul class="checklist">
+    <li>Add FAQ sections to all treatment service pages (5-8 questions each)</li>
+    <li>Add <code>FAQPage</code> schema to pages with FAQ content</li>
+    <li>Add <code>Article</code>/<code>BlogPosting</code> schema to all blog posts</li>
+    <li>Audit and fix image alt text sitewide</li>
+    <li>Add "Last updated" dates to all treatment service pages</li>
+    <li>Add "Medically reviewed by [Name, Credential]" badges to clinical content</li>
+  </ul>
+
+  <div class="timeline" style="margin-top: 1.5rem;">
+    <div class="timeline-item">
+      <div class="timeline-label standard">Phase 3 -- Month 2 (Content Expansion)</div>
+      <div class="timeline-title">Close Content Gaps</div>
+      <div class="timeline-desc">These increase topical authority and capture additional search queries.</div>
+    </div>
+  </div>
+
+  <ul class="checklist">
+    <li>Expand treatment service pages to 1,500+ words each</li>
+    <li>Add definition blocks (40-60 words) to the top of every service page</li>
+    <li>Add statistics with cited sources (SAMHSA, NIDA) to key pages</li>
+    <li>Build a Levels of Care comparison table (Residential vs PHP vs IOP vs Virtual)</li>
+    <li>Create insurance coverage guide pages (beyond PPC landing pages)</li>
+    <li>Create a "What to Expect" family resource page</li>
+  </ul>
+
+  <div class="timeline" style="margin-top: 1.5rem;">
+    <div class="timeline-item">
+      <div class="timeline-label standard">Phase 4 -- Ongoing</div>
+      <div class="timeline-title">Continuous Optimization</div>
+      <div class="timeline-desc">Maintain freshness and monitor AI search performance.</div>
+    </div>
+  </div>
+
+  <ul class="checklist">
+    <li>Expand blog posts to 2,500+ words for competitive topics</li>
+    <li>Verify and optimize third-party directory listings</li>
+    <li>Quarterly content freshness reviews (update dates, refresh statistics)</li>
+    <li>Monitor AI search citations monthly across ChatGPT, Perplexity, and Google AI Overviews</li>
+  </ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============ PROJECTED IMPACT ============ -->
+<div class="section">
+  <div class="section-number">Section 07</div>
+  <h2>Projected Impact</h2>
+  <p class="lead">What to expect as fixes are implemented, based on industry benchmarks for healthcare sites.</p>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">+30-40%</div>
+        <div class="stat-label">Expected AI visibility increase from schema markup alone</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">+15-25%</div>
+        <div class="stat-label">Estimated click-through rate improvement from meta descriptions</div>
+      </div>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">+37-40%</div>
+        <div class="stat-label">AI citation rate increase from adding statistics with sources</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">Stronger</div>
+        <div class="stat-label">E-E-A-T signals from author attribution (critical for YMYL)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">Timeline expectations</div>
+    <p>Technical fixes (schema, meta descriptions, H1 tags) typically show results within 2-6 weeks as Google re-crawls. Content improvements (expanded pages, FAQ sections, author attribution) take 1-3 months to fully impact rankings. AI search visibility improvements can be faster, as AI platforms re-index content more frequently than traditional search.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ TECHNICAL REFERENCE ============ -->
+<div class="section">
+  <div class="section-number">Appendix</div>
+  <h2>Technical Details</h2>
+
+  <h3>Site Platform</h3>
+  <p>The site runs on <strong>HubSpot CMS</strong> with the Vertical theme. Schema markup and meta tag changes can be managed through HubSpot's theme settings, page-level SEO options, and custom coded modules.</p>
+
+  <h3>Schema Markup -- Copy-Paste Implementation</h3>
+  <p>At minimum, the following JSON-LD should be added to the site's global header:</p>
+  <pre>{
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  "name": "Monument Recovery",
+  "url": "https://monumentrecovery.com",
+  "telephone": "+1-480-680-7025",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "560 W Brown Road, Suite 2001",
+    "addressLocality": "Mesa",
+    "addressRegion": "AZ",
+    "postalCode": "85201",
+    "addressCountry": "US"
+  },
+  "medicalSpecialty": "Addiction Medicine",
+  "availableService": [
+    "Residential Addiction Treatment",
+    "Partial Hospitalization Program (PHP)",
+    "Intensive Outpatient Program (IOP)",
+    "Virtual IOP",
+    "Mental Health Treatment",
+    "Aftercare Services"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=100091880113169",
+    "https://www.linkedin.com/company/monument-recovery/",
+    "https://www.instagram.com/monumentrecoveryaz/"
+  ]
+}</pre>
+
+  <h3>GatherUp Review Widget</h3>
+  <p>The site uses a GatherUp (reviewability.com) widget that includes an empty JSON-LD script tag. This should be investigated -- the widget may need configuration to output <code>AggregateRating</code> or <code>Review</code> schema. If it's not generating structured data, it's taking up space without providing value.</p>
+
+  <h3>Validation Tools</h3>
+  <table>
+    <thead>
+      <tr><th>Tool</th><th>Purpose</th><th>URL</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Rich Results Test</strong></td><td>Validate schema markup (renders JS)</td><td>search.google.com/test/rich-results</td></tr>
+      <tr><td><strong>Schema Validator</strong></td><td>Validate JSON-LD syntax</td><td>validator.schema.org</td></tr>
+      <tr><td><strong>Search Console</strong></td><td>Monitor indexation & rich results</td><td>search.google.com/search-console</td></tr>
+      <tr><td><strong>PageSpeed Insights</strong></td><td>Core Web Vitals check</td><td>pagespeed.web.dev</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="report-footer">
+  <p>This report was prepared on March 24, 2026 based on a review of monumentrecovery.com. Findings reflect the site's state at the time of audit. Schema markup detection was performed via HTML source inspection; JavaScript-injected schema should be verified using Google's Rich Results Test, which renders JavaScript.</p>
+</div>
+
+</body>
+</html>

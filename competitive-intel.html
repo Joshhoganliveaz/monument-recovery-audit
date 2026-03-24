@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monument Recovery - Competitive Intelligence Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: letter;
+    margin: 0.9in 1.1in;
+  }
+
+  :root {
+    --ink: #1a1a1a;
+    --ink-light: #4a4a4a;
+    --ink-muted: #7a7a7a;
+    --surface: #ffffff;
+    --surface-warm: #faf8f5;
+    --accent: #2d5a3d;
+    --accent-light: #e8f0eb;
+    --accent-mid: #3d7a54;
+    --border: #e2ddd6;
+    --red: #9b3232;
+    --red-bg: #fdf2f2;
+    --red-mid: #c44848;
+    --amber: #8a6914;
+    --amber-bg: #fef9ec;
+    --green: #2d5a3d;
+    --green-bg: #e8f0eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* --- TAB NAVIGATION --- */
+  .tab-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .tab-bar a {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    font-size: 9.5pt;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .tab-bar a:hover {
+    color: var(--ink);
+  }
+
+  .tab-bar a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--surface);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* --- COVER PAGE --- */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 0;
+    page-break-after: always;
+  }
+
+  .cover-rule {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 2rem;
+    border: none;
+  }
+
+  .cover-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+  }
+
+  .cover h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 40pt;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .cover h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .cover-subtitle {
+    font-size: 13pt;
+    color: var(--ink-muted);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    max-width: 480px;
+  }
+
+  .cover-meta dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 2px;
+  }
+
+  .cover-meta dd {
+    font-size: 10.5pt;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .cover-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    max-width: 480px;
+  }
+
+  .cover-stat-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28pt;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .cover-stat-label {
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+
+  /* --- SECTIONS --- */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22pt;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12pt;
+    font-weight: 600;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5pt;
+    font-weight: 600;
+    margin-top: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  p {
+    margin-bottom: 0.7rem;
+    color: var(--ink-light);
+  }
+
+  .lead {
+    font-size: 11.5pt;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    max-width: 580px;
+  }
+
+  /* --- OVERALL HEALTH GAUGE --- */
+  .health-gauge {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+
+  .gauge-ring {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .gauge-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .gauge-ring .bg {
+    fill: none;
+    stroke: #e8e4de;
+    stroke-width: 8;
+  }
+
+  .gauge-ring .fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 251;
+  }
+
+  .gauge-ring .score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Instrument Serif', serif;
+    font-size: 24pt;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .gauge-ring .score-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 18px));
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .gauge-details { flex: 1; }
+
+  .gauge-details h3 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+    font-size: 11pt;
+  }
+
+  .gauge-details p {
+    font-size: 9.5pt;
+    margin-bottom: 0;
+  }
+
+  .gauge-breakdown {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .gauge-breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+  }
+
+  .gauge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .gauge-dot.red { background: var(--red); }
+  .gauge-dot.amber { background: var(--amber); }
+  .gauge-dot.green { background: var(--green); }
+
+  /* --- SUMMARY CARDS --- */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 1.5rem 0;
+  }
+
+  .summary-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--surface-warm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .summary-card.critical { border-color: #d4a0a0; background: var(--red-bg); }
+  .summary-card.critical::before { background: var(--red); }
+  .summary-card.warning { border-color: #d4c49a; background: var(--amber-bg); }
+  .summary-card.warning::before { background: var(--amber); }
+  .summary-card.good { border-color: #a0c4ac; background: var(--green-bg); }
+  .summary-card.good::before { background: var(--green); }
+
+  .summary-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+
+  .summary-card .value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22pt;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .summary-card.critical .value { color: var(--red); }
+  .summary-card.warning .value { color: var(--amber); }
+  .summary-card.good .value { color: var(--green); }
+
+  .summary-card .detail {
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* --- ICON STAT CARDS --- */
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 1.5rem 0;
+  }
+
+  .stat-row.three-col {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .stat-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--surface-warm);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .stat-icon.red { background: var(--red-bg); color: var(--red); }
+  .stat-icon.amber { background: var(--amber-bg); color: var(--amber); }
+  .stat-icon.green { background: var(--green-bg); color: var(--green); }
+  .stat-icon.neutral { background: var(--accent-light); color: var(--accent); }
+
+  .stat-content { flex: 1; }
+
+  .stat-content .stat-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18pt;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .stat-content .stat-label {
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  /* --- TABLES --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 9.5pt;
+  }
+
+  thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--ink);
+    font-weight: 500;
+  }
+
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:nth-child(even) td { background: var(--surface-warm); }
+
+  /* Status dots in tables */
+  .status-pass, .status-fail, .status-warn, .status-na {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+
+  .status-pass::before, .status-fail::before, .status-warn::before, .status-na::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-pass { color: var(--green); }
+  .status-pass::before { background: var(--green); }
+  .status-fail { color: var(--red); }
+  .status-fail::before { background: var(--red); }
+  .status-warn { color: var(--amber); }
+  .status-warn::before { background: var(--amber); }
+  .status-na { color: var(--ink-muted); }
+  .status-na::before { background: var(--border); }
+
+  /* --- ISSUE CARDS --- */
+  .issue {
+    border-left: 3px solid var(--border);
+    padding: 16px 20px;
+    margin: 1.2rem 0;
+    background: var(--surface-warm);
+    border-radius: 0 8px 8px 0;
+    page-break-inside: avoid;
+  }
+
+  .issue.high { border-left-color: var(--red); }
+  .issue.medium { border-left-color: var(--amber); }
+  .issue.low { border-left-color: var(--green); }
+
+  .issue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .issue-title {
+    font-weight: 600;
+    font-size: 11pt;
+    color: var(--ink);
+  }
+
+  .impact-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  .impact-badge.high { color: var(--red); background: var(--red-bg); border: 1px solid #d4a0a0; }
+  .impact-badge.medium { color: var(--amber); background: var(--amber-bg); border: 1px solid #d4c49a; }
+  .impact-badge.low { color: var(--green); background: var(--green-bg); border: 1px solid #a0c4ac; }
+
+  .issue-body { color: var(--ink-light); font-size: 9.5pt; }
+  .issue-body p { margin-bottom: 0.5rem; }
+
+  .fix-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+
+  /* --- CALLOUTS --- */
+  .callout {
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 1.5rem 0;
+    page-break-inside: avoid;
+  }
+
+  .callout.important {
+    background: var(--red-bg);
+    border-color: #d4a0a0;
+  }
+
+  .callout.info {
+    background: var(--accent-light);
+    border-color: #a0c4ac;
+  }
+
+  .callout-title {
+    font-weight: 600;
+    font-size: 10.5pt;
+    margin-bottom: 6px;
+  }
+
+  .callout p {
+    font-size: 9.5pt;
+    margin-bottom: 0.3rem;
+  }
+
+  /* --- LISTS --- */
+  ul, ol {
+    padding-left: 1.4rem;
+    margin-bottom: 0.7rem;
+    color: var(--ink-light);
+  }
+
+  li { margin-bottom: 0.35rem; font-size: 9.5pt; line-height: 1.5; }
+
+  /* --- CODE --- */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* --- SCORE BARS --- */
+  .score-section {
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 1.5rem 0;
+  }
+
+  .score-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .score-label {
+    font-size: 9pt;
+    color: var(--ink-light);
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .score-bar-bg {
+    flex: 1;
+    height: 10px;
+    background: #e8e4de;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+  }
+
+  .score-bar-fill.red { background: linear-gradient(90deg, var(--red), var(--red-mid)); }
+  .score-bar-fill.amber { background: linear-gradient(90deg, #c49a2a, var(--amber)); }
+  .score-bar-fill.green { background: linear-gradient(90deg, var(--green), var(--accent-mid)); }
+
+  .score-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    font-weight: 500;
+    width: 32px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .score-value.red { color: var(--red); }
+  .score-value.amber { color: var(--amber); }
+  .score-value.green { color: var(--green); }
+
+  /* --- DIVIDERS --- */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .page-break { page-break-before: always; }
+
+  /* --- CHECKLIST --- */
+  .checklist { list-style: none; padding-left: 0; }
+
+  .checklist li {
+    padding: 8px 0 8px 2rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    background: var(--surface);
+  }
+
+  /* --- TIMELINE --- */
+  .timeline {
+    position: relative;
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+    page-break-inside: avoid;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--surface);
+    z-index: 1;
+    margin-left: 0px;
+  }
+
+  .timeline-item.urgent::before { border-color: var(--red); background: var(--red-bg); }
+  .timeline-item.medium::before { border-color: var(--amber); background: var(--amber-bg); }
+
+  .timeline-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .timeline-label.urgent { color: var(--red); }
+  .timeline-label.medium { color: var(--amber); }
+  .timeline-label.standard { color: var(--accent); }
+
+  .timeline-title {
+    font-weight: 600;
+    font-size: 10.5pt;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc {
+    font-size: 9pt;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* --- MODALITY TAGS --- */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0.8rem 0;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 3px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* --- TIER CARDS --- */
+  .tier-section {
+    margin: 1rem 0;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-warm);
+  }
+
+  .tier-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .tier-label.luxury { color: var(--amber); }
+  .tier-label.midmarket { color: var(--accent); }
+  .tier-label.broad { color: var(--ink-muted); }
+
+  .tier-names {
+    font-size: 9.5pt;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  .tier-names strong {
+    color: var(--ink);
+  }
+
+  /* --- FOOTER --- */
+  .report-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* --- INSURANCE GRID TABLE --- */
+  .insurance-table {
+    font-size: 8.5pt;
+  }
+
+  .insurance-table thead th {
+    font-size: 6.5pt;
+    padding: 8px 8px;
+    white-space: nowrap;
+  }
+
+  .insurance-table tbody td {
+    padding: 8px 8px;
+    text-align: center;
+  }
+
+  .insurance-table tbody td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+
+  @media print {
+    body { font-size: 10pt; padding: 0; max-width: none; }
+    .cover { min-height: auto; padding: 4rem 0; }
+    .tab-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TAB NAVIGATION ============ -->
+<nav class="tab-bar">
+  <a href="index.html">SEO Audit</a>
+  <a href="competitive-intel.html" class="active">Competitive Intel</a>
+</nav>
+
+<!-- ============ COVER PAGE ============ -->
+<div class="cover">
+  <hr class="cover-rule">
+  <div class="cover-badge">Competitive Intelligence</div>
+  <h1>Competitive Landscape &<br><em>Market Analysis</em></h1>
+  <p class="cover-subtitle">A comprehensive competitive analysis of Monument Recovery's position in the Phoenix metro RTC market, with competitor profiles, gap analysis, and strategic recommendations.</p>
+  <dl class="cover-meta">
+    <div>
+      <dt>Prepared For</dt>
+      <dd>Monument Recovery</dd>
+    </div>
+    <div>
+      <dt>Market</dt>
+      <dd>Phoenix Metro, AZ</dd>
+    </div>
+    <div>
+      <dt>Date</dt>
+      <dd>March 24, 2026</dd>
+    </div>
+  </dl>
+  <div class="cover-stats">
+    <div>
+      <div class="cover-stat-value">7</div>
+      <div class="cover-stat-label">Direct Competitors</div>
+    </div>
+    <div>
+      <div class="cover-stat-value">3</div>
+      <div class="cover-stat-label">Mesa-Based Rivals</div>
+    </div>
+    <div>
+      <div class="cover-stat-value">4</div>
+      <div class="cover-stat-label">Critical Gaps</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION 01: MARKET POSITION OVERVIEW ============ -->
+<div class="section">
+  <div class="section-number">Section 01</div>
+  <h2>Market Position Overview</h2>
+  <p class="lead">Monument Recovery operates a 4,600 sq ft residential treatment center in Mesa, AZ, currently at full capacity with 45 clients. They offer a continuum of care from RTC through Virtual IOP, with a holistic approach combining evidence-based therapies (CBT, DBT, Polyvagal Theory) with wellness practices (yoga, reiki, meditation). Their "Build Your Best Life" positioning and family-run culture are strengths, but the competitive landscape in the Phoenix metro is intense.</p>
+
+  <!-- Competitive Position Gauge -->
+  <div class="health-gauge">
+    <div class="gauge-ring">
+      <svg viewBox="0 0 100 100">
+        <circle class="bg" cx="50" cy="50" r="40"/>
+        <!-- 62/100 = 62%. stroke-dashoffset = 251 - (251 * 0.62) = 251 - 155.62 = 95.38 -->
+        <circle class="fill" cx="50" cy="50" r="40" stroke="#c49a2a" style="stroke-dashoffset: 95;"/>
+      </svg>
+      <span class="score-text">62</span>
+      <span class="score-label">/ 100</span>
+    </div>
+    <div class="gauge-details">
+      <h3>Competitive Position Score</h3>
+      <p>Strong demand signal and solid core services, but significant service gaps and geographic pressure from Mesa-based competitors limit competitive advantage.</p>
+      <div class="gauge-breakdown">
+        <div class="gauge-breakdown-item"><span class="gauge-dot red"></span> 4 Critical Gaps</div>
+        <div class="gauge-breakdown-item"><span class="gauge-dot amber"></span> 3 Moderate Gaps</div>
+        <div class="gauge-breakdown-item"><span class="gauge-dot green"></span> 4 Strengths</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card critical">
+      <div class="label">Critical</div>
+      <div class="value">Geographic Pressure</div>
+      <div class="detail">3 direct competitors in Mesa alone targeting same insurance panels</div>
+    </div>
+    <div class="summary-card warning">
+      <div class="label">Warning</div>
+      <div class="value">Service Gaps</div>
+      <div class="detail">No detox, no MAT, no specialty populations - limiting referral capture</div>
+    </div>
+    <div class="summary-card good">
+      <div class="label">Good</div>
+      <div class="value">Demand Signal</div>
+      <div class="detail">45 clients, full capacity, expansion already in motion</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ SECTION 02: MONUMENT RECOVERY PROFILE ============ -->
+<div class="section">
+  <div class="section-number">Section 02</div>
+  <h2>Monument Recovery Profile</h2>
+
+  <div class="stat-row three-col">
+    <div class="stat-card">
+      <div class="stat-icon neutral">&#x1F3E0;</div>
+      <div class="stat-content">
+        <div class="stat-value">Mesa, AZ</div>
+        <div class="stat-label">560 W Brown Rd, Suite 2001, 85201</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">&#x1F465;</div>
+      <div class="stat-content">
+        <div class="stat-value">~45</div>
+        <div class="stat-label">Current Clients (Full Capacity)</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon neutral">&#x1F4C5;</div>
+      <div class="stat-content">
+        <div class="stat-value">~2023</div>
+        <div class="stat-label">Year Founded</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-row three-col">
+    <div class="stat-card">
+      <div class="stat-icon green">&#x1F3C5;</div>
+      <div class="stat-content">
+        <div class="stat-value">Gold Seal</div>
+        <div class="stat-label">Joint Commission National Accreditation</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon neutral">&#x260E;</div>
+      <div class="stat-content">
+        <div class="stat-value">480-680-7025</div>
+        <div class="stat-label">Primary Contact</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">&#x2B50;</div>
+      <div class="stat-content">
+        <div class="stat-value">~4.7</div>
+        <div class="stat-label">Star Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Leadership &amp; Staff</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Credentials</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>JP Ketron</td>
+        <td>Owner/Operator</td>
+        <td>--</td>
+        <td>Referenced as mentor by staff</td>
+      </tr>
+      <tr>
+        <td>Melissa Ketron</td>
+        <td>Director of Nursing</td>
+        <td>RN</td>
+        <td>Present since inception</td>
+      </tr>
+      <tr>
+        <td>Tara McCracken</td>
+        <td>Registered Nurse</td>
+        <td>RN</td>
+        <td>Personal recovery background</td>
+      </tr>
+      <tr>
+        <td>Michael Pelaez</td>
+        <td>Outpatient Therapist</td>
+        <td>LAAC, CCTS-I</td>
+        <td>Trauma specialist since 2016</td>
+      </tr>
+      <tr>
+        <td>Cassie Henricks</td>
+        <td>Business Dev &amp; Admissions</td>
+        <td>--</td>
+        <td>Former patient (Oct 2023), fluent in Spanish</td>
+      </tr>
+      <tr>
+        <td>Luke Petrozza</td>
+        <td>Staff</td>
+        <td>--</td>
+        <td>In recovery himself</td>
+      </tr>
+      <tr>
+        <td>Mark Czarniecki</td>
+        <td>Resident Assistant</td>
+        <td>--</td>
+        <td>Lived recovery experience</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Levels of Care</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Level</th>
+        <th>Details</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Residential (RTC)</td>
+        <td>24/7 inpatient, home-like campus</td>
+        <td>~30 days</td>
+      </tr>
+      <tr>
+        <td>PHP</td>
+        <td>Intensive therapy, recovery housing evenings</td>
+        <td>30-60 days</td>
+      </tr>
+      <tr>
+        <td>IOP</td>
+        <td>Flexible 3-5 days/week, on-site Mesa</td>
+        <td>Varies</td>
+      </tr>
+      <tr>
+        <td>Virtual IOP</td>
+        <td>Telehealth, statewide AZ</td>
+        <td>Varies</td>
+      </tr>
+      <tr>
+        <td>Aftercare/Alumni</td>
+        <td>Events, Arizona Alumni Coalition</td>
+        <td>Ongoing</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Insurance Panel</h3>
+  <div class="tag-list">
+    <span class="tag">Aetna</span>
+    <span class="tag">Ambetter</span>
+    <span class="tag">AmeriHealth</span>
+    <span class="tag">Beacon</span>
+    <span class="tag">Blue Cross</span>
+    <span class="tag">Bright Health</span>
+    <span class="tag">CompPsych</span>
+    <span class="tag">GEHA</span>
+    <span class="tag">MHN</span>
+    <span class="tag">Multiplan</span>
+    <span class="tag">Surest</span>
+    <span class="tag">TRICARE</span>
+    <span class="tag">UMR</span>
+  </div>
+
+  <h3>Treatment Modalities</h3>
+  <div class="tag-list">
+    <span class="tag">CBT</span>
+    <span class="tag">DBT</span>
+    <span class="tag">Polyvagal Theory</span>
+    <span class="tag">Trauma-Informed Care (CCTS)</span>
+    <span class="tag">Somatic Tools</span>
+    <span class="tag">Family Therapy</span>
+    <span class="tag">Yoga</span>
+    <span class="tag">Reiki</span>
+    <span class="tag">Meditation</span>
+    <span class="tag">Art Therapy</span>
+    <span class="tag">Fitness</span>
+    <span class="tag">12-Step + DBT Integration</span>
+    <span class="tag">Life Skills Training</span>
+  </div>
+</div>
+
+<hr class="divider">
+<div class="page-break"></div>
+
+<!-- ============ SECTION 03: COMPETITOR PROFILES ============ -->
+<div class="section">
+  <div class="section-number">Section 03</div>
+  <h2>Competitor Profiles</h2>
+  <p class="lead">Seven direct competitors operate in the Phoenix metro area, three of which are based in Mesa. Each is profiled below with threat-level assessment based on geographic overlap, service substitutability, and insurance panel competition.</p>
+
+  <!-- Competitor 1: Revive Recovery Center -->
+  <div class="issue high">
+    <div class="issue-header">
+      <span class="issue-title">Revive Recovery Center</span>
+      <span class="impact-badge high">Highest Threat</span>
+    </div>
+    <div class="issue-body">
+      <div class="fix-label">Location</div>
+      <p>Mesa, AZ (127 W. Juanita Ave., Suite 110)</p>
+      <div class="fix-label">Services</div>
+      <p>Residential, PHP, IOP, Virtual IOP, Adolescent Virtual IOP, Outpatient Detox, CBT, Art Therapy, Yoga/Fitness, Psychiatry/Med Management, Recovery Coaching</p>
+      <div class="fix-label">Insurance</div>
+      <p>ComPsych, UHC, Beacon, Cigna, Optum, MultiPlan, Aetna, Blue Cross</p>
+      <div class="fix-label">Positioning</div>
+      <p>"Innovative Treatment. Exceptional Care. Transformative Results."</p>
+      <div class="fix-label">Why Dangerous</div>
+      <p>Same city, nearly identical insurance panel, adolescent virtual IOP (unique), Psychology Today verified, staff with lived recovery experience. Most directly substitutable competitor.</p>
+    </div>
+  </div>
+
+  <!-- Competitor 2: Soba Mesa -->
+  <div class="issue high">
+    <div class="issue-header">
+      <span class="issue-title">Soba Mesa</span>
+      <span class="impact-badge high">High Threat</span>
+    </div>
+    <div class="issue-body">
+      <div class="fix-label">Location</div>
+      <p>Mesa, AZ (6262 E. Broadway Road, Suite 110)</p>
+      <div class="fix-label">Services</div>
+      <p>Medically Supervised Detox (20-bed inpatient), Residential, PHP, IOP, Sober Living, Holistic (acupuncture, art therapy, equine therapy, meditation)</p>
+      <div class="fix-label">Insurance</div>
+      <p>Accepts insurance. Joint Commission + AZ ADHS accredited.</p>
+      <div class="fix-label">Why Dangerous</div>
+      <p>Same city, 20-bed detox facility Monument lacks, full continuum from detox through aftercare, equine therapy, Joint Commission accreditation.</p>
+    </div>
+  </div>
+
+  <!-- Competitor 3: Hope & Healing -->
+  <div class="issue high">
+    <div class="issue-header">
+      <span class="issue-title">Hope &amp; Healing Addiction Treatment</span>
+      <span class="impact-badge high">High Threat</span>
+    </div>
+    <div class="issue-body">
+      <div class="fix-label">Location</div>
+      <p>Mesa (primary) + Scottsdale, Phoenix, Surprise (4 locations)</p>
+      <div class="fix-label">Services</div>
+      <p>Residential (30-90 days), Outpatient, Virtual Therapy, Trauma &amp; Addiction, OCD Treatment, Prison Re-Entry Program</p>
+      <div class="fix-label">Insurance</div>
+      <p>Most PPO plans, in-network. Grants available.</p>
+      <div class="fix-label">Why Dangerous</div>
+      <p>Same primary city, 4 locations (largest footprint), prison re-entry niche, OCD specialization, grant funding, scaling fast.</p>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Competitor 4: Pinnacle Peak Recovery -->
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">Pinnacle Peak Recovery</span>
+      <span class="impact-badge medium">High Threat</span>
+    </div>
+    <div class="issue-body">
+      <div class="fix-label">Location</div>
+      <p>Scottsdale, AZ (8070 E Morgan Trail Unit 200)</p>
+      <div class="fix-label">Services</div>
+      <p>Detox, Residential, PHP, Outpatient, Supportive Housing, Veteran "Heroes Haven", Mental Health</p>
+      <div class="fix-label">Insurance</div>
+      <p>Tricare, Ambetter, Cigna, Humana, Allegiance, HealthNet + self-pay</p>
+      <div class="fix-label">Why Dangerous</div>
+      <p>Strongest brand (A&amp;E's Intervention), veteran niche, master's-level clinical staff, detox capability, extensive modalities (EMDR, ART, psychodrama, somatic experiencing).</p>
+    </div>
+  </div>
+
+  <!-- Competitor 5: Cornerstone Healing Center -->
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">Cornerstone Healing Center</span>
+      <span class="impact-badge medium">High Threat</span>
+    </div>
+    <div class="issue-body">
+      <div class="fix-label">Location</div>
+      <p>Scottsdale, AZ (16444 N 91st St) + Phoenix</p>
+      <div class="fix-label">Services</div>
+      <p>Residential, PHP, IOP, Virtual IOP, Supportive Housing, Recovery Coaching (1 year), Executive Rehab, Court Services, Teen programming</p>
+      <div class="fix-label">Insurance</div>
+      <p>Aetna, AHCCCS, BCBS, Cigna, GEHA, Health Choice, UHC, UMR, TriCare</p>
+      <div class="fix-label">Why Dangerous</div>
+      <p>Broadest service range, accepts AHCCCS (Medicaid), teen programs, court services, executive track, 1-year recovery coaching.</p>
+    </div>
+  </div>
+
+  <!-- Competitor 6: Changes Healing Center -->
+  <div class="issue medium">
+    <div class="issue-header">
+      <span class="issue-title">Changes Healing Center</span>
+      <span class="impact-badge medium">Medium Threat</span>
+    </div>
+    <div class="issue-body">
+      <div class="fix-label">Location</div>
+      <p>Phoenix, AZ (29 W Thomas Rd, Suite 205)</p>
+      <div class="fix-label">Services</div>
+      <p>Inpatient Residential, PHP, IOP, Dual Diagnosis</p>
+      <div class="fix-label">Insurance</div>
+      <p>AHCCCS + private. Joint Commission.</p>
+      <div class="fix-label">Positioning</div>
+      <p>"Arizona's Leader in Alcohol and Drug Rehab Programs"</p>
+      <div class="fix-label">Why Dangerous</div>
+      <p>Claims market leadership, AHCCCS acceptance, Joint Commission. Different geography limits direct overlap.</p>
+    </div>
+  </div>
+
+  <!-- Competitor 7: Fountain Hills Recovery -->
+  <div class="issue low">
+    <div class="issue-header">
+      <span class="issue-title">Fountain Hills Recovery</span>
+      <span class="impact-badge low">Low-Medium Threat</span>
+    </div>
+    <div class="issue-body">
+      <div class="fix-label">Location</div>
+      <p>Fountain Hills, AZ + Scottsdale</p>
+      <div class="fix-label">Services</div>
+      <p>Luxury Residential, PHP, IOP, Detox, Dual Diagnosis, Trauma, Equine/Music/Experiential, BrainsWay Deep TMS</p>
+      <div class="fix-label">Target</div>
+      <p>Executives, first responders, professional athletes</p>
+      <div class="fix-label">Insurance</div>
+      <p>Major private, cash pay. NO Medicare/Medicaid.</p>
+      <div class="fix-label">Why Less Threatening</div>
+      <p>Different market segment (luxury tier with estate properties, chef meals, etc). Could poach higher-income clients but mostly non-overlapping.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+<div class="page-break"></div>
+
+<!-- ============ SECTION 04: FEATURE GAP ANALYSIS ============ -->
+<div class="section">
+  <div class="section-number">Section 04</div>
+  <h2>Feature Gap Analysis</h2>
+  <p class="lead">A side-by-side comparison of Monument Recovery's capabilities against the strongest competitor offering in each category. Green dots indicate competitive parity, red dots indicate gaps that may be costing referrals.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Monument</th>
+        <th>Best Competitor</th>
+        <th>Gap Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Residential Treatment</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Multiple</td>
+        <td><span class="status-pass">Competitive</span></td>
+      </tr>
+      <tr>
+        <td>PHP</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Multiple</td>
+        <td><span class="status-pass">Competitive</span></td>
+      </tr>
+      <tr>
+        <td>IOP / Virtual IOP</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Multiple</td>
+        <td><span class="status-pass">Competitive</span></td>
+      </tr>
+      <tr>
+        <td>On-Site Detox</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Soba Mesa (20-bed)</td>
+        <td><span class="status-fail">Critical Gap</span></td>
+      </tr>
+      <tr>
+        <td>MAT (Medication-Assisted)</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Revive Recovery</td>
+        <td><span class="status-fail">Gap</span></td>
+      </tr>
+      <tr>
+        <td>AHCCCS / Medicaid</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Cornerstone, Changes</td>
+        <td><span class="status-fail">Gap</span></td>
+      </tr>
+      <tr>
+        <td>Veteran Program</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Pinnacle Peak</td>
+        <td><span class="status-warn">Opportunity</span></td>
+      </tr>
+      <tr>
+        <td>Teen / Adolescent</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Cornerstone, Revive</td>
+        <td><span class="status-warn">Opportunity</span></td>
+      </tr>
+      <tr>
+        <td>Executive Track</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Cornerstone, Fountain Hills</td>
+        <td><span class="status-warn">Opportunity</span></td>
+      </tr>
+      <tr>
+        <td>Prison Re-Entry</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Hope &amp; Healing</td>
+        <td><span class="status-na">Niche</span></td>
+      </tr>
+      <tr>
+        <td>Equine Therapy</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Soba Mesa, Fountain Hills</td>
+        <td><span class="status-na">Low Priority</span></td>
+      </tr>
+      <tr>
+        <td>Deep TMS</td>
+        <td><span class="status-fail">No</span></td>
+        <td>Fountain Hills</td>
+        <td><span class="status-na">Low Priority</span></td>
+      </tr>
+      <tr>
+        <td>Holistic (Yoga/Reiki/Meditation)</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Multiple</td>
+        <td><span class="status-pass">Strength</span></td>
+      </tr>
+      <tr>
+        <td>Alumni Community</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Few competitors</td>
+        <td><span class="status-pass">Strength</span></td>
+      </tr>
+      <tr>
+        <td>Joint Commission Accreditation</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Multiple</td>
+        <td><span class="status-warn">Competitive (needs promotion)</span></td>
+      </tr>
+      <tr>
+        <td>PPC / Insurance Landing Pages</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Few competitors</td>
+        <td><span class="status-pass">Strength</span></td>
+      </tr>
+      <tr>
+        <td>Consistent Blog Cadence</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td>Few</td>
+        <td><span class="status-pass">Strength</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider">
+<div class="page-break"></div>
+
+<!-- ============ SECTION 05: INSURANCE PANEL COMPARISON ============ -->
+<div class="section">
+  <div class="section-number">Section 05</div>
+  <h2>Insurance Panel Comparison</h2>
+  <p class="lead">Insurance panel overlap is the strongest predictor of direct competition. Monument shares the most overlap with Revive Recovery (5 shared insurers) and Cornerstone Healing (5 shared insurers).</p>
+
+  <table class="insurance-table">
+    <thead>
+      <tr>
+        <th>Insurer</th>
+        <th>Monument</th>
+        <th>Revive</th>
+        <th>Soba Mesa</th>
+        <th>Hope &amp; Healing</th>
+        <th>Pinnacle Peak</th>
+        <th>Cornerstone</th>
+        <th>Changes</th>
+        <th>Fountain Hills</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aetna</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>Blue Cross</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>Cigna</td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>UHC</td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>TRICARE</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>AHCCCS</td>
+        <td><span class="status-fail">No</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>GEHA</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>Ambetter</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>ComPsych</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>MultiPlan</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+      <tr>
+        <td>Beacon</td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-pass">Yes</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+        <td><span class="status-na">--</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider">
+
+<!-- ============ SECTION 06: COMPETITIVE POSITIONING MAP ============ -->
+<div class="section">
+  <div class="section-number">Section 06</div>
+  <h2>Competitive Positioning Map</h2>
+  <p class="lead">The Phoenix metro RTC market segments into three distinct tiers based on pricing, target demographic, and insurance acceptance. Understanding where Monument sits is critical for differentiation strategy.</p>
+
+  <div class="tier-section">
+    <div class="tier-label luxury">Luxury Tier</div>
+    <p class="tier-names"><strong>Fountain Hills Recovery</strong> - Estate properties, chef-prepared meals, BrainsWay Deep TMS, equine/music/experiential therapy. Targets executives, first responders, professional athletes. Premium pricing, cash pay emphasis.</p>
+  </div>
+
+  <div class="tier-section" style="border-color: var(--accent);">
+    <div class="tier-label midmarket">Mid-Market Tier (Monument's Segment)</div>
+    <p class="tier-names"><strong>Monument Recovery</strong>, <strong>Revive Recovery</strong>, <strong>Soba Mesa</strong>, <strong>Hope &amp; Healing</strong>, <strong>Cornerstone Healing</strong> - Evidence-based + holistic modalities, insurance-focused, residential through outpatient continuum. The most crowded and competitive tier.</p>
+  </div>
+
+  <div class="tier-section">
+    <div class="tier-label broad">Broad Access Tier</div>
+    <p class="tier-names"><strong>Changes Healing Center</strong>, <strong>Cornerstone Healing</strong> (spans both) - AHCCCS/Medicaid acceptance opens access to a broader patient pool. Lower reimbursement rates but higher volume potential.</p>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Monument's Positioning Challenge</div>
+    <p>Monument sits in the crowded mid-market tier. Key differentiators: "Build Your Best Life" transformation messaging (vs generic "compassionate care"), family-run culture, strong alumni community. But the supporting website copy blends into category norms. The planned mental-health-primary RTC expansion could move Monument into a genuinely differentiated position that no competitor currently occupies.</p>
+  </div>
+</div>
+
+<hr class="divider">
+<div class="page-break"></div>
+
+<!-- ============ SECTION 07: STRATEGIC RECOMMENDATIONS ============ -->
+<div class="section">
+  <div class="section-number">Section 07</div>
+  <h2>Strategic Recommendations</h2>
+  <p class="lead">Prioritized actions based on competitive gap analysis, ordered by urgency and potential impact on Monument Recovery's market position.</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item urgent">
+      <div class="timeline-label urgent">Urgent Priority</div>
+      <div class="timeline-title">1. Promote Joint Commission Gold Seal prominently</div>
+      <div class="timeline-desc">Monument has this accreditation but it's buried. Every competitor leads with it. Add badge to header, homepage hero, and all service pages. This is a trust signal that directly influences referral decisions and insurance panel negotiations.</div>
+    </div>
+
+    <div class="timeline-item urgent">
+      <div class="timeline-label urgent">Urgent Priority</div>
+      <div class="timeline-title">2. Address the detox gap</div>
+      <div class="timeline-desc">Patients needing detox go to Soba Mesa or Pinnacle Peak first and may never transfer. Either build detox capability or formalize referral partnerships with guaranteed transfer agreements. Every lost detox patient is a lost RTC/PHP/IOP client.</div>
+    </div>
+
+    <div class="timeline-item medium">
+      <div class="timeline-label medium">High Priority</div>
+      <div class="timeline-title">3. Define a specialty population niche</div>
+      <div class="timeline-desc">JP's planned Mental Health primary RTC fills this gap perfectly. No competitor leads with mental-health-primary positioning. This would be a genuine market differentiator that creates a category of one in the Phoenix metro.</div>
+    </div>
+
+    <div class="timeline-item medium">
+      <div class="timeline-label medium">High Priority</div>
+      <div class="timeline-title">4. Evaluate AHCCCS/Medicaid acceptance</div>
+      <div class="timeline-desc">Two competitors (Cornerstone, Changes) access this broader patient pool. If operationally viable, this significantly expands Monument's addressable market and reduces dependence on private insurance panels where competition is fiercest.</div>
+    </div>
+
+    <div class="timeline-item medium">
+      <div class="timeline-label medium">High Priority</div>
+      <div class="timeline-title">5. Build a dedicated Team page</div>
+      <div class="timeline-desc">Competitors showcase leadership with credentials. Monument only has scattered blog profiles. Consolidate into an authoritative team page with credentials (RN, LAAC, CCTS-I). Lived recovery experience is a competitive advantage - make it visible.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-label standard">Medium Priority</div>
+      <div class="timeline-title">6. Sharpen website messaging</div>
+      <div class="timeline-desc">Move beyond "holistic + evidence-based + compassionate" that every competitor uses. Lean into the family culture, lived-recovery staff, and transformation narrative. The "Build Your Best Life" framework is distinctive - but it needs to permeate every page, not just the tagline.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-label standard">Medium Priority</div>
+      <div class="timeline-title">7. Expand sober living properties</div>
+      <div class="timeline-desc">Already in motion per expansion plans. Matches the property acquisition + Monument billing strategy. Additional sober living capacity extends the client relationship and revenue per client through the full continuum of care.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-label standard">Medium Priority</div>
+      <div class="timeline-title">8. Monitor competitor pricing and insurance changes</div>
+      <div class="timeline-desc">Revive Recovery's nearly identical panel makes them the top competitive threat. Track any moves quarterly. Insurance panel changes, new program launches, and marketing shifts from Mesa-based competitors should trigger immediate strategic review.</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ SECTION 08: MONITORING CADENCE ============ -->
+<div class="section">
+  <div class="section-number">Section 08</div>
+  <h2>Monitoring Cadence</h2>
+  <p class="lead">Recommended competitive intelligence review schedule, prioritized by threat level. Trigger events should prompt immediate out-of-cycle review regardless of scheduled cadence.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Competitor</th>
+        <th>Watch Level</th>
+        <th>Cadence</th>
+        <th>Trigger Events</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Revive Recovery</td>
+        <td><span class="status-fail">Highest</span></td>
+        <td>Monthly</td>
+        <td>Insurance panel changes, new programs, Mesa marketing</td>
+      </tr>
+      <tr>
+        <td>Soba Mesa</td>
+        <td><span class="status-fail">High</span></td>
+        <td>Monthly</td>
+        <td>Detox capacity changes, new services</td>
+      </tr>
+      <tr>
+        <td>Hope &amp; Healing</td>
+        <td><span class="status-fail">High</span></td>
+        <td>Monthly</td>
+        <td>New location openings, grant programs</td>
+      </tr>
+      <tr>
+        <td>Pinnacle Peak</td>
+        <td><span class="status-warn">Moderate</span></td>
+        <td>Quarterly</td>
+        <td>New specialty programs, media appearances</td>
+      </tr>
+      <tr>
+        <td>Cornerstone</td>
+        <td><span class="status-warn">Moderate</span></td>
+        <td>Quarterly</td>
+        <td>Service additions, AHCCCS changes</td>
+      </tr>
+      <tr>
+        <td>Changes Healing</td>
+        <td><span class="status-pass">Low</span></td>
+        <td>Semi-annually</td>
+        <td>Positioning shifts, geographic expansion</td>
+      </tr>
+      <tr>
+        <td>Fountain Hills</td>
+        <td><span class="status-pass">Low</span></td>
+        <td>Semi-annually</td>
+        <td>Pricing changes, new technology</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div class="report-footer">
+  This report was prepared on March 24, 2026 based on competitive research of the Phoenix metro residential treatment center market. Competitor information was gathered from publicly available website data, review platforms, and directory listings. Market conditions and competitor offerings may change. Recommended review cadence: quarterly.
+</div>
+
+</body>
+</html>
